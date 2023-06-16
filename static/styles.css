@@ -187,3 +187,13 @@ h5 {
     font-weight: 500;
     font-family: 'Fira Sans', sans-serif;
 }
+
+@media only screen and (max-width: 768px) {
+    .admin_login_page, .user_login_page, .user_signup_page, .add_flight_page, .search_page {
+      width: 80%;
+    }
+  
+    .form-group {
+      width: 40%;
+    }
+  }
