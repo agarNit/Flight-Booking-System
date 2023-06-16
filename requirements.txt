@@ -27,14 +27,6 @@ pdfkit==1.0.0
 pexpect==4.8.0
 Pillow==9.0.1
 platformdirs==2.5.1
-
-
 PyJWT==2.3.0
-
 requests==2.25.1
-rsa==4.8
-scikit-learn==1.0.1
-scipy==1.7.3
-
-sklearn==0.0.post1
 SQLAlchemy==1.4.31
