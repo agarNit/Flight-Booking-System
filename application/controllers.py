@@ -19,16 +19,19 @@ def admin_login():
         email = request.form["email"]
         password = request.form["password"]
         if username == '' or email == '' or password == '':
-            return redirect(url_for('admin_login'), errors = errors)
-        # print(username, email, password)
+            flash("Please fi`ll all the fields")
+            return redirect(url_for('admin_login'))
         users = db.session.query(Master_User).filter(Master_User.email == email).all()
         for user in users:
             if user == None:
+                flash("User does not exist")
                 return redirect(url_for('admin_login'))
             if user.password != password:
+                flash("Incorrect password")
                 return redirect(url_for('admin_login'))
             if user.user_type == 'admin':
                 return redirect('/admin_dashboard')
+    flash("You are not authorized to access this page")
     return redirect(url_for('admin_login'))
 
 @app.route("/signup/user", methods = ['GET', 'POST'])
@@ -52,6 +55,7 @@ def user_signup():
             db.session.add(new_user)
             db.session.commit()
             return redirect(url_for('user_login'))
+        flash("Passwords do not match")
         return redirect(url_for('user_signup'))
 
 @app.route("/login/user", methods = ['GET', 'POST'])
@@ -63,15 +67,17 @@ def user_login():
         email = request.form["email"]
         password = request.form["password"]
         if username == '' or email == '' or password == '':
-            alert = "Please fill all the fields"
+            flash("Please fill all the fields")
             return redirect(url_for('user_login'))
         user = db.session.query(Master_User).filter(Master_User.email == email).all()
         if len(user)==0:
+            flash("User does not exist")
             return redirect(url_for('user_login'))
         if user[0].password != password:
+            flash("Incorrect password")
             return redirect(url_for('user_login'))
         if user[0].user_type == 'admin':
-            alert = "You are not authorized to access this page"
+            flash("You are not authorized to access this page")
             return redirect(url_for('user_login'))
         else:
             return redirect('/user_dashboard/{}'.format(user[0].id))
@@ -100,7 +106,7 @@ def add_flight():
         duration = request.form["duration"]
         
         if flight_number == '' or origin == '' or destination == '' or date == '' or arrival_time == '' or departure_time == '' or duration == '':
-            alert = "Please fill all the fields"
+            flash("Please fill all the fields")
             return redirect(url_for('add_flight'))
         
         new_flight = Flights(flight_number = flight_number, origin = origin, destination = destination, date = date, arrival_time = arrival_time, departure_time = departure_time, duration = duration)
@@ -122,6 +128,11 @@ def remove_flight(flight_id):
 @app.route("/book_flight/<int:flight_id>/<int:user_id>", methods = ['GET'])
 def book_flight(flight_id, user_id):
     flight = db.session.query(Flights).filter(Flights.id == flight_id).first()
+
+    if flight.capacity == 0:
+        flash("No seats available")
+        return redirect(url_for('user_dashboard', user_id = user_id))
+    
     user = db.session.query(Master_User).filter(Master_User.id == user_id).first()
     new_booking = My_Bookings(f_id = flight.id, u_id = user.id)
     flight.capacity -= 1
@@ -174,6 +185,11 @@ def search(user_id):
         date = request.form["date"]
         start_time = request.form["start_time"]
         end_time = request.form["end_time"]
+
+        if origin == '' or destination == '' or date == '' or start_time == '' or end_time == '':
+            flash("Please fill all the fields")
+            return redirect(url_for('search', user_id = user_id))
+        
         flights = db.session.query(Flights).filter(Flights.origin == origin).filter(Flights.destination == destination).filter(Flights.date == date).filter(Flights.arrival_time.between(start_time, end_time)).all()
         user = db.session.query(Master_User).filter(Master_User.id == user_id).first()
 
