@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Flight</title>
+  <link rel="stylesheet" href="{{url_for('static', filename = 'styles.css')}}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body class="body">
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">SkyBook</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="/admin_dashboard">Home</a></li>
+        <li class="active"><a href="/add_flight">Add Flight</a></li>
+        <li><a href="/view_bookings">View Bookings</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="/admin_logout"><span class="glyphicon glyphicon-log-in"></span> LogOut</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="add_flight_page">
+    <form action="/add_flight" class="form" method='POST'>
+      <h1 class="add_flight_title">Add flight details</h1>
+
+      <div class="form-group">
+        <label class="label">Flight Number</label>
+        <input type="text" id="flight_number" class="form-control" name="flight_number" placeholder="Flight Number" autocomplete="off" required>
+      </div>
+      <div class="form-group">
+        <label class="label">Origin</label>
+        <input type="text" id="origin" class="form-control" name="origin" placeholder="Origin" autocomplete="off" required>
+      </div>
+      <div class="form-group">
+        <label class="label">Destination</label>
+        <input type="text" id="destination" class="form-control" name="destination" placeholder="Destination" autocomplete="off" required>
+      </div>
+      <div class="form-group">
+        <label class="label">Date</label>
+        <input type="text" id="date" class="form-control" name="date" placeholder="Date" autocomplete="off" required>
+      </div>
+      <div class="form-group">
+        <label class="label">Arrival Time</label>
+        <input type="text" id="arrival_time" class="form-control" name="arrival_time" placeholder="Arrival TIme" autocomplete="off" required>
+      </div>
+      <div class="form-group">
+        <label class="label">Departure Time</label>
+        <input type="text" id="departure_time" class="form-control" name="departure_time" placeholder="Departure Time" autocomplete="off" required>
+      </div>
+      <div class="form-group">
+        <label class="label">Duration</label>
+        <input type="text" id="duration" class="form-control" name="duration" placeholder="Duration" autocomplete="off" required>
+      </div>
+      <button type="submit" class="add_flight_btn">Add Flight</button>
+    </form>
+  </div>
+</body>
+</html>

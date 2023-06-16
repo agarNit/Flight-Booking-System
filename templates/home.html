@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HomePage</title>
+  <link rel="stylesheet" href="{{url_for('static', filename = 'styles.css')}}">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body class="body">
+    <div class="home">
+        <h1 class="home_title">Welcome to SkyBook</h1>
+        <div>
+            <button class="user_login" onclick="window.location.href='/login/user'">User Login</button>
+            <button class="admin_login" onclick="window.location.href='/login/admin'">Admin Login</button>
+        </div>
+    </div>
+</body>
+</html>
