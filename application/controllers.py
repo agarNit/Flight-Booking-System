@@ -1,6 +1,6 @@
 import datetime as dt
 from datetime import datetime
-from flask import render_template, request, redirect, url_for
+from flask import flash, render_template, request, redirect, url_for
 from flask import current_app as app
 from sqlalchemy import func
 from .database import db 
@@ -19,8 +19,7 @@ def admin_login():
         email = request.form["email"]
         password = request.form["password"]
         if username == '' or email == '' or password == '':
-            alert = "Please fill all the fields"
-            return redirect(url_for('admin_login'))
+            return redirect(url_for('admin_login'), errors = errors)
         # print(username, email, password)
         users = db.session.query(Master_User).filter(Master_User.email == email).all()
         for user in users:
@@ -42,11 +41,11 @@ def user_signup():
         password = request.form["password"]
         confirm_password = request.form["confirm_password"]
         if username == '' or email == '' or password == '' or confirm_password == '':
-            alert = "Please fill all the fields"
+            flash("Please fill all the fields")
             return redirect(url_for('user_signup'))
         user = db.session.query(Master_User).filter(Master_User.email == email).all()
         if len(user)!=0:
-            alert = "User already exists"
+            flash("User already exists")
             return redirect(url_for('user_login'))
         if password == confirm_password:
             new_user = Master_User(username = username, email = email, password = password)

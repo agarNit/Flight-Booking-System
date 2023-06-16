@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Erica+One&family=Farsan&display=swap');
 
+html {
+    overflow: scroll;
+}
+
 .body {
     display: flex;
     justify-content: center;

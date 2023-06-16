@@ -8,6 +8,7 @@ def create_app():
     app.config.from_object(LocalDevelopmentConfig)
     db.init_app(app)
     app.app_context().push()
+    app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'
     return app
     
 app = create_app()

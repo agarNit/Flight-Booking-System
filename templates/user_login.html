@@ -11,6 +11,13 @@
 </head>
 <body class="body">
     <div class="user_login_page">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="notification is-danger">
+                    {{ messages[0] }}. Go to <a href="/login/user">login page</a>.
+                </div>
+            {% endif %}
+        {% endwith %}
         <form action="/login/user" class="form" method = "POST" id="user_login_id" > 
         <h1 class="user_login_title">Login</h1>
 
